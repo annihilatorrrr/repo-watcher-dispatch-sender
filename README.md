@@ -1,0 +1,47 @@
+# repo-watcher-dispatch-sender
+
+This app is used to send a `repository_dispatch` event to the destination repo set in [config.py](/src/config.py) or Environmental Variables whenver a commit is made on the upstream repo.
+
+This setup is for my own use, please fork and make your own if you want :D
+
+Give this repo a :star: if you like it or it helps you!
+
+## How to use?
+
+### Set the Environmental Variables or [config.py](/src/config.py) file
+
+It's really not difficult to set this up, you just need to define the variables in [config file](/src/config.py), the varibales include the following:
+
+ - **GH_PAT**: Github Personal Access Token with `repo` access to the destination repo. Cause you know, you can't trigger any workflow anywhere except the ones you have acess to :p
+ - **REPOSITORY_PAIR**: The main stuff, this tells the script about source and destination repo, the source repo is the one we check commits for, destination is for sending the `repository_dispatch` to it. It should be in this format: `<source>:<branch>:<destination>`, the source and destination should be in this format: `<github_user/repo>`, Example: `<divkix/proxygrab@main:octocat/proxygrab>`
+ - **TIME_PERIOD**: The time after which script should sleep for, i.e. wait before running again. It is not recommented to set it to less than **30**, default is 60 minutes
+ - **SLEEP_TIME**: The time before performing another action after one has been done, i.e. wait time between 2 consecutive requests. It is not recommented to set it to **0**, default is 1 minute
+ - **EVENT_TYPE**: The event which should be sent in `repository_dispatch`, read more here: [docs.github.com](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#repository_dispatch)
+ - **DB_URI**: MongoDB URL for database usage of bot.
+
+### Choose how you want to run it
+
+You can run it in several different ways, one of the easiest might be to use heroku.
+
+Another option is to locally run it on you pc as it is or using docker.
+
+Docker images can be found here: [ghcr.io](https://github.com/DivideProjects/repo-watcher-dispatch-sender/pkgs/container/repo-watcher-dispatch-sender)
+
+You can even easily build your own docker images using the provided dockerfiles!
+
+
+# What is the use of this?
+
+It can be whatever you want it to do, you can use it trigger automatic builds, tests, builds, and a lot of things...
+
+# FAQ
+
+Some general questions you might stumble upon
+
+### Why can't I trigger to a specific branch on destination repo?
+
+It's not really needed most of time, if you stiff want this feature we'll be happy to merge your pull request for it :)
+
+### Why should `SLEEP_TIME` should not be set to 0?
+
+Every API has limitations, and so is the case with Github, it has a soft-limit of 60 api calls per hour, so we need to make sure that we don't hit the limits.

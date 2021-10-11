@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "repo-watcher-dispatch-sender"
+version = "1.0.0"
+description = "A repo-watcher to watch for commits on a repo an trigger GitHub action by sending a repository_dispatch event to destinantion repo"
+authors = ["Divanshu Chauhan <23524935+Divkix@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.26.0"
+pymongo = "^3.12.0"
+dnspython = "^2.1.0"
+platformdirs = "^2.4.0"
+
+[tool.poetry.dev-dependencies]
+black = "^21.9b0"
+isort = "^5.9.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
