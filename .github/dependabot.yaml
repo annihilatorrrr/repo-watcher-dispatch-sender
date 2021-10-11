@@ -9,7 +9,7 @@ updates:
           timezone: "Asia/Kolkata"
       open-pull-requests-limit: 20
       target-branch: main
-    - package_manager: docker
+    - package-ecosystem: docker
       directory: "/"
       schedule:
           interval: daily
