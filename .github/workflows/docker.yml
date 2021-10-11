@@ -2,6 +2,12 @@ name: CI
 
 on:
     push:
+        paths:
+            - "src/**.py"
+            - pyproject.toml
+            - poetry.lock
+            - Dockerfile
+            - .dockerignore
 
 env:
     IMAGE_NAME: repo-watcher-dispatch-sender
