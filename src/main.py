@@ -54,7 +54,7 @@ def main():
             dest_repo = repo["dest"]
 
             last_commit_date = get_repo_latest_commit(src_repo)
-            if last_commit_date == None:
+            if last_commit_date is None:
                 print("Error getting last commit date for {}".format(src_repo["repo"]))
                 continue
 
@@ -64,7 +64,7 @@ def main():
 
             # last commit date in db is None, so we need to send the dispatch event
             # it is the first time we are running the script with the repo
-            if (last_commit_date > last_commit_db) or (last_commit_db == None):
+            if (last_commit_date > last_commit_db) or (last_commit_db is None):
                 if send_repo_action(dest_repo):
                     print(
                         "Successfully sent repository_dispatch event: {} to {}".format(
