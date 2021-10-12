@@ -51,7 +51,7 @@ jobs:
                     --tag docker.io/$USER/$IMAGE_NAME:$revision \
                     .
 
-            - name: Push image to GitHub Packages
+            - name: Push image to GitHub Packages and Docker Hub
               run: |
                   docker push ghcr.io/$USER/$IMAGE_NAME:$revision
                   docker push ghcr.io/$USER/$IMAGE_NAME:latest
