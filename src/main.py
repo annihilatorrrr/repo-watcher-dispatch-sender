@@ -21,8 +21,7 @@ def get_repo_latest_commit(src_repo: str):
 
     if resp.status_code == 200:
         return resp.json()[0]["commit"]["author"]["date"]
-    else:
-        return None
+    return None
 
 
 # function used to send a repository dispatch event to specified github repo
