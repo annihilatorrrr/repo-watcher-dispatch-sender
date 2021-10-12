@@ -1,5 +1,28 @@
 # repo-watcher-dispatch-sender
 
+<p align='center'>
+  <img src="https://img.shields.io/github/forks/DivideProjects/repo-watcher-dispatch-sender?style=flat-square" alt="Forks">
+  <img src="https://img.shields.io/github/stars/DivideProjects/repo-watcher-dispatch-sender?style=flat-square" alt="Stars">
+  <img src="https://img.shields.io/github/issues/DivideProjects/repo-watcher-dispatch-sender?style=flat-square" alt="Issues">
+  <img src="https://img.shields.io/github/license/DivideProjects/repo-watcher-dispatch-sender?style=flat-square" alt="LICENSE">
+  <img src="https://img.shields.io/github/contributors/DivideProjects/repo-watcher-dispatch-sender?style=flat-square" alt="Contributors">
+  <img src="https://img.shields.io/github/repo-size/DivideProjects/repo-watcher-dispatch-sender?style=flat-square" alt="Repo Size">
+  <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/DivideProjects/repo-watcher-dispatch-sender&amp;title=Profile%20Views" alt="Views">
+</p>
+
+<p align='center'>
+  <a href="https://www.python.org/" alt="made-with-python"> <img src="https://img.shields.io/badge/Made%20with-Python-1f425f.svg?style=flat-square&logo=python&color=blue" /> </a>
+  <a href="https://github.com/DivideProjects/repo-watcher-dispatch-sender" alt="Docker!"> <img src="https://aleen42.github.io/badges/src/docker.svg" /> </a>
+  <a href="https://deepsource.io/gh/DivideProjects/repo-watcher-dispatch-sender/?ref=repository-badge"><img src="https://static.deepsource.io/deepsource-badge-light-mini.svg" alt="DeepSource"></a>
+  <a href="https://makeapullrequest.com" alt="PRs Welcome"> <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" /> </a>
+</p>
+
+<p align='center'>
+ <a href="https://heroku.com/deploy?template=https://github.com/DivideProjects/repo-watcher-dispatch-sender"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy on Heroku"></a></br></br>
+  <a href="https://t.me/DivideProjects"><img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" alt="Join us on Telegram"></a></br></br>
+
+</p>
+
 This app is used to send a `repository_dispatch` event to the destination repo set in [config.py](/src/config.py) or Environmental Variables whenver a commit is made on the upstream repo.
 
 This setup is for my own use, please fork and make your own if you want :D
