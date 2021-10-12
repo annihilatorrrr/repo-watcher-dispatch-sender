@@ -8,7 +8,7 @@ from errors import InvalidRepositoryFormat
 # always use master or default branch
 # or the main/master or whatever the master branch is set as
 def prettify_repository_pair(repo_pair: str):
-    raw_repos = [i for i in repo_pair.split(",")]
+    raw_repos = list(repo_pair.split(","))
     list_of_repos = []
     for repo in raw_repos:
         # repo: divkix/proxygrab@main:octocat/proxygrab
