@@ -25,10 +25,26 @@ You can run it in several different ways, one of the easiest might be to use her
 
 Another option is to locally run it on you pc as it is or using docker.
 
-Docker images can be found here: [ghcr.io](https://github.com/DivideProjects/repo-watcher-dispatch-sender/pkgs/container/repo-watcher-dispatch-sender)
+Docker images can be found here: [ghcr.io](https://github.com/DivideProjects/repo-watcher-dispatch-sender/pkgs/container/repo-watcher-dispatch-sender) or [Docker Hub](https://hub.docker.com/r/divideprojects/repo-watcher-dispatch-sender)
 
 You can even easily build your own docker images using the provided dockerfiles!
 
+
+### Running using docker
+
+You can easily use the docker image like this:
+
+```sh 
+docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -e DB_URI="<mongo db uri>" divideprojects/repo-watcher-dispatch-sender:latest
+```
+
+or
+
+```sh 
+docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -e DB_URI="<mongo db uri>" ghcr.io/divideprojects/repo-watcher-dispatch-sender:latest
+```
+
+These is absolutely no difference between the 2 commands above, you can use any, the first one fetched image from [docker hub](https://hub.docker.com/r/divideprojects/repo-watcher-dispatch-sender) while other one gets the image from [ghcr.io](https://github.com/DivideProjects/repo-watcher-dispatch-sender/pkgs/container/repo-watcher-dispatch-sender)
 
 # What is the use of this?
 
