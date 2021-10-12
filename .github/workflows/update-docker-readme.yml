@@ -1,0 +1,23 @@
+name: Update Docker Hub Description
+
+on:
+    push:
+        paths:
+            - README.md
+
+env:
+    IMAGE_NAME: repo-watcher-dispatch-sender
+    USER: divideprojects
+
+jobs:
+    build-image:
+        name: Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Docker Hub Description
+              uses: peter-evans/dockerhub-description@v2
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_PASSWORD }}
+                  repository: $USER/$IMAGE

@@ -11,6 +11,7 @@ on:
 
 env:
     IMAGE_NAME: repo-watcher-dispatch-sender
+    USER: divideprojects
 
 jobs:
     build-image:
@@ -30,20 +31,29 @@ jobs:
                   username: ${{ github.actor }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Login to DockerHub
+              uses: docker/login-action@v1
+              with:
+                  username: ${{ secrets.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
             - name: Get Revision
               run: |
-                  revision=${GITHUB_REF##*/}-${GITHUB_SHA::7}-$(date +'%Y%m%d%H%M')
+                  revision=$(git rev-parse --short HEAD)
                   echo "revision=$revision" >> $GITHUB_ENV
 
             - name: Build image
               run: |
                   docker build \
-                    --build-arg REVISION=$revision \
-                    --tag ghcr.io/divideprojects/$IMAGE_NAME:latest \
-                    --tag ghcr.io/divideprojects/$IMAGE_NAME:$revision \
+                    --tag ghcr.io/$USER/$IMAGE_NAME:latest \
+                    --tag ghcr.io/$USER/$IMAGE_NAME:$revision \
+                    --tag docker.io/$USER/$IMAGE_NAME:latest \
+                    --tag docker.io/$USER/$IMAGE_NAME:$revision \
                     .
 
             - name: Push image to GitHub Packages
               run: |
-                  docker push ghcr.io/divideprojects/$IMAGE_NAME:$revision
-                  docker push ghcr.io/divideprojects/$IMAGE_NAME:latest
+                  docker push ghcr.io/$USER/$IMAGE_NAME:$revision
+                  docker push ghcr.io/$USER/$IMAGE_NAME:latest
+                  docker push docker.io/$USER/$IMAGE_NAME:latest
+                  docker push docker.io/$USER/$IMAGE_NAME:$revision
