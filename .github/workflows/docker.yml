@@ -8,6 +8,7 @@ on:
             - poetry.lock
             - Dockerfile
             - .dockerignore
+            - .github/workflows/docker.yml
 
 env:
     IMAGE_NAME: repo-watcher-dispatch-sender

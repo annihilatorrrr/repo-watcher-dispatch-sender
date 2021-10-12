@@ -4,10 +4,7 @@ on:
     push:
         paths:
             - README.md
-
-env:
-    IMAGE_NAME: repo-watcher-dispatch-sender
-    USER: divideprojects
+            - .github/workflows/update-docker-readme.yml
 
 jobs:
     build-image:
@@ -15,9 +12,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - uses: actions/checkout@v2
+
             - name: Docker Hub Description
               uses: peter-evans/dockerhub-description@v2
               with:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
-                  repository: $USER/$IMAGE
