@@ -49,45 +49,48 @@ def send_repo_action(dest_repo: dict):
 # main funtion to execute the code
 def main():
     print("Running script...")
-    for repo in Vars.REPOSITORY_PAIR:
-        src_repo = repo["src"]
-        dest_repo = repo["dest"]
+    while True:
+        for repo in Vars.REPOSITORY_PAIR:
+            src_repo = repo["src"]
+            dest_repo = repo["dest"]
 
-        last_commit_date = get_repo_latest_commit(src_repo)
-        if last_commit_date == None:
-            print("Error getting last commit date for {}".format(src_repo["repo"]))
-            continue
+            last_commit_date = get_repo_latest_commit(src_repo)
+            if last_commit_date == None:
+                print("Error getting last commit date for {}".format(src_repo["repo"]))
+                continue
 
-        last_commit_date = datetime.strptime(last_commit_date, "%Y-%m-%dT%H:%M:%SZ")
+            last_commit_date = datetime.strptime(last_commit_date, "%Y-%m-%dT%H:%M:%SZ")
 
-        last_commit_db = Repo().update_repo(src_repo, last_commit_date)
+            last_commit_db = Repo().update_repo(src_repo, last_commit_date)
 
-        if last_commit_date > last_commit_db:
-            if send_repo_action(dest_repo):
-                print(
-                    "Successfully sent repository_dispatch event: {} to {}".format(
-                        Vars.EVENT_TYPE, src_repo["repo"]
+            # last commit date in db is None, so we need to send the dispatch event
+            # it is the first time we are running the script with the repo
+            if (last_commit_date > last_commit_db) or (last_commit_db == None):
+                if send_repo_action(dest_repo):
+                    print(
+                        "Successfully sent repository_dispatch event: {} to {}".format(
+                            Vars.EVENT_TYPE, src_repo["repo"]
+                        )
                     )
-                )
+                else:
+                    print(
+                        "Failed to send repository_dispatch event: {} to {}".format(
+                            Vars.EVENT_TYPE, src_repo["repo"]
+                        )
+                    )
+                if Vars.SLEEP_TIME:
+                    print(f"Sleeping for {Vars.SLEEP_TIME} minutes...")
+                    sleep(Vars.SLEEP_TIME * 60)
             else:
                 print(
-                    "Failed to send repository_dispatch event: {} to {}".format(
-                        Vars.EVENT_TYPE, src_repo["repo"]
+                    "No new commits found on {} since last dispatch event".format(
+                        src_repo["repo"]
                     )
                 )
-            if Vars.SLEEP_TIME:
-                print(f"Sleeping for {Vars.SLEEP_TIME} minutes...")
-                sleep(Vars.SLEEP_TIME * 60)
-        else:
-            print(
-                "No new commits found on {} since last dispatch event".format(
-                    src_repo["repo"]
-                )
-            )
 
-    print("Done Running!")
-    print(f"Will run again after {Vars.TIME_PERIOD} minutes...")
-    sleep(Vars.TIME_PERIOD * 60)
+        print("Done Running!")
+        print(f"Will run again after {Vars.TIME_PERIOD} minutes...")
+        sleep(Vars.TIME_PERIOD * 60)
 
 
 if __name__ == "__main__":

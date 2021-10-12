@@ -71,6 +71,7 @@ class Repo(MongoDB):
         return self.find_all({})
 
     def update_repo(self, repo: dict, last_commit: datetime.datetime):
+        # using '/' could have some issue, so replaced with '_
         src_repo = repo["repo"].replace("/", "_")
         repo_data = self.find_one({"_id": src_repo})
         if not repo_data:
@@ -79,7 +80,7 @@ class Repo(MongoDB):
                 "last_commit": last_commit,
             }
             self.insert_one(repo_data)
-            return repo_data["last_commit"]
+            return None
         self.update({"_id": src_repo}, {"last_commit": last_commit})
         return repo_data["last_commit"]
 

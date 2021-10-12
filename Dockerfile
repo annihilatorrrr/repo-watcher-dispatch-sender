@@ -24,4 +24,7 @@ RUN poetry config virtualenvs.create false
 # Install requirements without dev requirements and without interaction
 RUN poetry install --no-dev --no-interaction
 
+# gives some issues with the docker image
+RUN poetry add platformdirs="^2.4.0"
+
 ENTRYPOINT ["poetry","run","python","src/main.py"]
