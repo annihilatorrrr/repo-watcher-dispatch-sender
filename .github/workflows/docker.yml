@@ -41,7 +41,7 @@ jobs:
               run: |
                   IMG="repo-watcher-dispatch-sender"
                   OWNER="$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')"
-                  echo "BUILD_VER=1.0.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+                  echo "BUILD_VER=1.1.$GITHUB_RUN_ID" >> $GITHUB_ENV
                   echo "IMG=${IMG}" >> $GITHUB_ENV
                   echo "IMAGE=${OWNER}/${IMG}" >> $GITHUB_ENV
                   echo "BUILD_DATE=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
