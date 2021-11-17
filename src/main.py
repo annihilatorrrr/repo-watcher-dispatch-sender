@@ -3,7 +3,7 @@ from requests import get, post
 from config import Vars
 from time import sleep
 from json import dumps
-from mongo import Repo
+from db import Repo
 from datetime import datetime
 
 # This functio returns the last commit done on the repo
@@ -60,7 +60,7 @@ def main():
 
             last_commit_date = datetime.strptime(last_commit_date, "%Y-%m-%dT%H:%M:%SZ")
 
-            last_commit_db = Repo().update_repo(src_repo, last_commit_date)
+            last_commit_db = Repo.update_repo(src_repo, last_commit_date)
 
             # last commit date in db is None, so we need to send the dispatch event
             # it is the first time we are running the script with the repo

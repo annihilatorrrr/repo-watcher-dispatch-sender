@@ -16,6 +16,3 @@ class Vars:
 
     # Type of event to be sent to the Github repo
     EVENT_TYPE = load_var("EVENT_TYPE", "upstream_update")
-
-    # Mongo DB Database URL
-    DB_URI = load_var("DB_URI")

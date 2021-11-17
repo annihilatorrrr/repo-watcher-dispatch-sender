@@ -39,7 +39,6 @@ It's really not difficult to set this up, you just need to define the variables 
  - **TIME_PERIOD**: The time after which script should sleep for, i.e. wait before running again. It is not recommented to set it to less than **30**, default is 60 minutes
  - **SLEEP_TIME**: The time before performing another action after one has been done, i.e. wait time between 2 consecutive requests. It is not recommented to set it to **0**, default is 1 minute
  - **EVENT_TYPE**: The event which should be sent in `repository_dispatch`, read more here: [docs.github.com](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#repository_dispatch)
- - **DB_URI**: MongoDB URL for database usage of bot.
 
 ### Choose how you want to run it
 
@@ -54,16 +53,22 @@ You can even easily build your own docker images using the provided dockerfiles!
 
 ### Running using docker
 
+First create a docker volume to persist data:
+
+```sh
+docker volume create repowatcher
+```
+
 You can easily use the docker image like this:
 
 ```sh 
-docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -e DB_URI="<mongo db uri>" divideprojects/repo-watcher-dispatch-sender:latest
+docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -v repowatcher:/app divideprojects/repo-watcher-dispatch-sender:latest
 ```
 
 or
 
 ```sh 
-docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -e DB_URI="<mongo db uri>" ghcr.io/divideprojects/repo-watcher-dispatch-sender:latest
+docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -v repowatcher:/app ghcr.io/divideprojects/repo-watcher-dispatch-sender:latest
 ```
 
 These is absolutely no difference between the 2 commands above, you can use any, the first one fetched image from [docker hub](https://hub.docker.com/r/divideprojects/repo-watcher-dispatch-sender) while other one gets the image from [ghcr.io](https://github.com/DivideProjects/repo-watcher-dispatch-sender/pkgs/container/repo-watcher-dispatch-sender)
