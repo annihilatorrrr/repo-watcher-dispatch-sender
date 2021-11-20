@@ -1,4 +1,4 @@
-from utils import prettify_repository_pair, load_var
+from utils import load_var, prettify_repository_pair
 
 
 class Vars:

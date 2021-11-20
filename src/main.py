@@ -1,10 +1,13 @@
-from requests.structures import CaseInsensitiveDict
-from requests import get, post
-from config import Vars
-from time import sleep
-from json import dumps
-from db import Repo
 from datetime import datetime
+from json import dumps
+from time import sleep
+
+from requests import get, post
+from requests.structures import CaseInsensitiveDict
+
+from config import Vars
+from db import Repo
+
 
 # This functio returns the last commit done on the repo
 # if status_code of requests is 200, then it returns the latest commit date else None
@@ -33,7 +36,7 @@ def send_repo_action(dest_repo: dict):
     # format the headers
     headers = CaseInsensitiveDict()
     headers["Accept"] = "application/vnd.github.v3+json"
-    headers["Authorization"] = "Bearer {}".format(Vars.GH_PAT)
+    headers["Authorization"] = f"Bearer {Vars.GH_PAT}"
     headers["Content-Type"] = "application/x-www-form-urlencoded"
 
     # the data we are sending in the request
@@ -68,14 +71,16 @@ def main():
                 if send_repo_action(dest_repo):
                     print(
                         "Successfully sent repository_dispatch event: {} to {}".format(
-                            Vars.EVENT_TYPE, src_repo["repo"]
-                        )
+                            Vars.EVENT_TYPE,
+                            src_repo["repo"],
+                        ),
                     )
                 else:
                     print(
                         "Failed to send repository_dispatch event: {} to {}".format(
-                            Vars.EVENT_TYPE, src_repo["repo"]
-                        )
+                            Vars.EVENT_TYPE,
+                            src_repo["repo"],
+                        ),
                     )
                 if Vars.SLEEP_TIME:
                     print(f"Sleeping for {Vars.SLEEP_TIME} minutes...")
@@ -83,8 +88,8 @@ def main():
             else:
                 print(
                     "No new commits found on {} since last dispatch event".format(
-                        src_repo["repo"]
-                    )
+                        src_repo["repo"],
+                    ),
                 )
 
         print("Done Running!")

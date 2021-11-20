@@ -1,5 +1,7 @@
 from os import environ
+
 from errors import InvalidRepositoryFormat
+
 
 # return the repository pair as a list of dict in the format:
 # [{'repo': 'github_username/repo_name', 'branch': 'branch_name'}]

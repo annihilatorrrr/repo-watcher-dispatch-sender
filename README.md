@@ -61,13 +61,13 @@ docker volume create repowatcher
 
 You can easily use the docker image like this:
 
-```sh 
+```sh
 docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -v repowatcher:/app divideprojects/repo-watcher-dispatch-sender:latest
 ```
 
 or
 
-```sh 
+```sh
 docker run -e GH_PAT="<your GH PAT>" -e REPOSITORY_PAIR="<repo pairs>" -e TIME_PERIOD=60 -e SLEEP_TIME=1 -e EVENT_TYPE="<name of event you want to send>" -v repowatcher:/app ghcr.io/divideprojects/repo-watcher-dispatch-sender:latest
 ```
 
