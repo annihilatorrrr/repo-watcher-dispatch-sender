@@ -10,6 +10,12 @@ ENV PYTHONUNBUFFERED 1
 # Enter Workplace
 WORKDIR /app
 
+# install dependencies
+RUN apt update && apt upgrade -y \
+    && apt install -y curl bash git \
+    && apt-get autoremove --purge \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
+
 # Install poetry
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
 ENV PATH="/root/.local/bin:$PATH"
