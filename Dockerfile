@@ -14,7 +14,7 @@ WORKDIR /app
 
 # install dependencies
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y curl bash git \
+    && apt-get install -y --no-install-recommends curl bash git \
     && apt-get autoremove --purge \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
 
