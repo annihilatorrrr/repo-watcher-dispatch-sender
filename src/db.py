@@ -1,5 +1,5 @@
 from datetime import datetime
-from pickledb import load
+from pickledb_ujson import load
 
 
 LocalDB = load(f"/app/repowatcher_local.db", True)
