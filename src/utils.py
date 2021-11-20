@@ -1,5 +1,3 @@
-from os import environ
-
 from errors import InvalidRepositoryFormat
 
 
@@ -44,8 +42,3 @@ def prettify_repository_pair(repo_pair: str):
             raise InvalidRepositoryFormat()
 
     return list_of_repos
-
-
-# load the var using environ.get
-def load_var(var_name, def_value=None):
-    return environ.get(var_name, def_value)

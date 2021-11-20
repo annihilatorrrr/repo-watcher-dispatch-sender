@@ -2,8 +2,10 @@ FROM python:3.10.0-slim-bullseye
 
 # Don't use cached python packages
 ENV PIP_NO_CACHE_DIR 1
+
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE 1
+
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED 1
 
@@ -11,8 +13,8 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # install dependencies
-RUN apt update && apt upgrade -y \
-    && apt install -y curl bash git \
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get install -y curl bash git \
     && apt-get autoremove --purge \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives /tmp
 
@@ -33,7 +35,5 @@ RUN poetry install --no-dev --no-interaction --no-ansi && rm -rf /root/.cache
 # Copy leftover files
 COPY . .
 
-# gives some issues with the docker image, so installing separately
-RUN pip install platformdirs~=2.4.0
-
-ENTRYPOINT ["poetry", "run", "python", "src/main.py"]
+# start the process
+ENTRYPOINT poetry run python src/main.py
