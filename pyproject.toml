@@ -6,7 +6,7 @@ authors = ["Divanshu Chauhan <23524935+Divkix@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-requests = "^2.26.0"
+requests = "^2.27.0"
 pickledb-ujson = "^1.0.3"
 prettyconf = "^2.2.1"
 
